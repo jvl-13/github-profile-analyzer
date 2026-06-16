@@ -1,23 +1,43 @@
-import React from "react";
-import { motion } from "framer-motion";
+export default function SimilarProjects({
+  summary,
+}) {
 
-export default function SimilarProjects() {
+  const section =
+    summary.split(
+      "**Similar projects:**"
+    )[1] || "";
+
+  const projects = section
+    .split("\n")
+    .filter((x) =>
+      x.trim().startsWith("-")
+    )
+    .map((x) =>
+      x.replace("-", "").trim()
+    );
+
   return (
     <div className="mt-10">
-      <h3 className="mb-4 font-semibold">Similar Projects</h3>
+
+      <h3 className="mb-4">
+        Similar Projects
+      </h3>
 
       <div className="flex gap-4 overflow-x-auto">
-        {[1, 2, 3, 4].map((i) => (
-          <motion.div
-            whileHover={{ scale: 1.05 }}
-            key={i}
-            className="min-w-[220px] bg-slate-900 p-4 rounded-xl"
+
+        {projects.map((project) => (
+
+          <div
+            key={project}
+            className="min-w-[250px] bg-slate-900 p-5 rounded-xl"
           >
-            <h4 className="font-medium">project-{i}</h4>
-            <p className="text-sm text-gray-400">Short description</p>
-          </motion.div>
+            {project}
+          </div>
+
         ))}
+
       </div>
+
     </div>
   );
 }

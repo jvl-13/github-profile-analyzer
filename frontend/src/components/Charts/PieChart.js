@@ -7,16 +7,21 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-const data = [
-  { name: "TypeScript", value: 57 },
-  { name: "JavaScript", value: 25 },
-  { name: "CSS", value: 8 },
-  { name: "Other", value: 10 },
-];
+
 
 const COLORS = ["#3B82F6", "#FACC15", "#22C55E", "#EF4444"];
 
-export default function PieChartComponent() {
+export default function PieChartComponent({
+  languages = {} ,
+}) {
+  
+  const data = Object.entries(
+    languages
+  ).map(([name, value]) => ({
+    name,
+    value,
+  }));
+
   return (
     <div className="bg-slate-900 p-6 rounded-2xl h-[350px] text-white">
       <h3 className="mb-4 text-xl font-semibold">
