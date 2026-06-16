@@ -26,5 +26,60 @@ async function getReadme(owner, repo) {
     const buff = Buffer.from(res.data.content, "base64");
     return buff.toString("utf-8");
 }
+async function getCommits(
+    owner,
+    repo
+) {
 
-module.exports = { getRepo, getLanguages, getFileTree, getReadme };
+    const commits = [];
+
+    for (
+        let month = 0;
+        month < 6;
+        month++
+    ) {
+
+        const end =
+            new Date();
+
+        end.setMonth(
+            end.getMonth() - month
+        );
+
+        const start =
+            new Date(end);
+
+        start.setMonth(
+            start.getMonth() - 1
+        );
+
+        const res =
+            await axios.get(
+
+                `https://api.github.com/repos/${owner}/${repo}/commits`,
+
+                {
+                    headers,
+
+                    params: {
+
+                        since:
+                            start.toISOString(),
+
+                        until:
+                            end.toISOString(),
+
+                        per_page: 100
+                    }
+                }
+            );
+
+        commits.push(
+            ...res.data
+        );
+    }
+
+    return commits;
+}
+
+module.exports = { getRepo, getLanguages, getFileTree, getReadme, getCommits };

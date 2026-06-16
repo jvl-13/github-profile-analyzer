@@ -14,7 +14,6 @@ Return:
 - Project summary
 - Difficulty
 - Use cases
-- Similar projects
 `;
 
   try {
