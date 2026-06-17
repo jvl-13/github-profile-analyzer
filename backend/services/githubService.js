@@ -22,9 +22,18 @@ async function getFileTree(owner, repo, branch = "main") {
 }
 
 async function getReadme(owner, repo) {
-    const res = await axios.get(`https://api.github.com/repos/${owner}/${repo}/readme`, { headers });
-    const buff = Buffer.from(res.data.content, "base64");
-    return buff.toString("utf-8");
+    try {
+        const res = await axios.get(`https://api.github.com/repos/${owner}/${repo}/readme`, { headers });
+
+        const buff = Buffer.from(res.data.content, "base64");
+        
+        const text = buff.toString("utf-8");
+
+        return text || null;
+    } catch (err){
+        console.log ("README NOT FOUND");
+        return null;
+    }
 }
 async function getCommits(
     owner,
