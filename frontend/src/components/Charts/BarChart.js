@@ -1,14 +1,5 @@
-import {
-  BarChart,
-  Bar,
-  XAxis,
-  YAxis,
-  Tooltip,
-  ResponsiveContainer,
-} from "recharts";
-
 export default function BarChartComponent({ complexity }) {
-  const data = [
+  const chartData = [
     {
       name: "Files",
       value: complexity.totalFiles,
@@ -28,7 +19,7 @@ export default function BarChartComponent({ complexity }) {
       <h2 className="text-xl font-bold mb-4">Complexity</h2>
 
       <ResponsiveContainer width="100%" height={300}>
-        <BarChart data={data}>
+        <BarChart data={chartData}>
           <XAxis dataKey="name" />
           <YAxis />
           <Tooltip />
