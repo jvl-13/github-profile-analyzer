@@ -20,7 +20,7 @@ export default function App() {
       setLoading(true);
 
       const response = await fetch(
-        `${process.env.REACT_APP_API_URL}/api/analyze`,
+        "https://repo-match-ai.onrender.com/api/analyze",
         {
           method: "POST",
           headers: {
